@@ -6,6 +6,9 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -49,8 +52,8 @@ export const createUserDocumentFromAuth = async (
   console.log(userDocRef);
 
   const userSnapshot = await getDoc(userDocRef);
-  console.log(userSnapshot);
-  console.log(userSnapshot.exists());
+  // console.log(userSnapshot);
+  // console.log(userSnapshot.exists());
 
   // create new user document if doesnt exist yet
   if (!userSnapshot.exists()) {
@@ -62,7 +65,7 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
-        // ...additionalInfo,
+        ...additionalInfo,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -73,6 +76,15 @@ export const createUserDocumentFromAuth = async (
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
-
   return await createUserWithEmailAndPassword(auth, email, password);
 };
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
