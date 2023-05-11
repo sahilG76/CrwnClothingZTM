@@ -43,6 +43,10 @@ export const CartProvider = ({ children }) => {
   };
 
   const adjustItemQuantity = (product, newQuantity) => {
+    if (newQuantity < 1) {
+      removeItem(product);
+      return;
+    }
     const adjustedItems = cartItems.map((item) =>
       item.id === product.id ? { ...item, quantity: newQuantity } : item
     );

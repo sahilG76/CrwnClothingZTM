@@ -5,6 +5,8 @@ import { CartContext } from "../../contexts/cart.context";
 import DecrementButton from "../decrement-button/decrement-button.component";
 import IncrementButton from "../increment-button/increment-button.component";
 
+import "./checkout-item.styles.scss";
+
 const CheckoutItem = ({ cartItem }) => {
   const { name, quantity, imageUrl, price } = cartItem;
 
@@ -19,13 +21,13 @@ const CheckoutItem = ({ cartItem }) => {
   }, [adjustedQty]);
 
   return (
-    <div className="checkout-item">
-      <img src={imageUrl} alt={name} />
-      <span>{name}</span>
+    <div className="checkout-item-container">
+      <img class="image-container" src={imageUrl} alt={name} />
+      <span class="name">{name}</span>
       <DecrementButton onClickHandler={decrementQty} />
-      <span> {quantity}</span>
+      <span class="quantity"> {quantity}</span>
       <IncrementButton onClickHandler={incrementQty} />
-      <span>{price * quantity}</span>
+      <span class="price">{price * quantity}</span>
       <button
         onClick={() => {
           removeItem(cartItem);
