@@ -10,32 +10,32 @@ import "./checkout-item.styles.scss";
 const CheckoutItem = ({ cartItem }) => {
   const { name, quantity, imageUrl, price } = cartItem;
 
-  const { adjustItemQuantity, removeItem } = useContext(CartContext);
+  const { clearItemFromCart, addItemToCart, removeItemFromCart } =
+    useContext(CartContext);
 
-  const [adjustedQty, setAdjustedQty] = useState(quantity);
-  const decrementQty = () => setAdjustedQty(adjustedQty - 1);
-  const incrementQty = () => setAdjustedQty(adjustedQty + 1);
-
-  useEffect(() => {
-    adjustItemQuantity(cartItem, adjustedQty);
-  }, [adjustedQty]);
+  const clearItemHandler = () => clearItemFromCart(cartItem);
+  const addItemHandler = () => addItemToCart(cartItem);
+  const removeItemHandler = () => removeItemFromCart(cartItem);
 
   return (
     <div className="checkout-item-container">
-      <img class="image-container" src={imageUrl} alt={name} />
-      <span class="name">{name}</span>
-      <DecrementButton onClickHandler={decrementQty} />
-      <span class="quantity"> {quantity}</span>
-      <IncrementButton onClickHandler={incrementQty} />
-      <span class="price">{price * quantity}</span>
-      <button
-        onClick={() => {
-          removeItem(cartItem);
-        }}
-      >
-        X
-      </button>
-      {/* <button onClick={removeItem(cartItem)}> X </button> */}
+      <div className="image-container">
+        <img src={imageUrl} alt={name} />
+      </div>
+      <span className="name">{name}</span>
+      <span className="quantity">
+        <div className="arrow" onClick={removeItemHandler}>
+          &#10094;
+        </div>
+        <span className="value">{quantity}</span>
+        <div className="arrow" onClick={addItemHandler}>
+          &#10095;
+        </div>
+      </span>
+      <span className="price">{price}</span>
+      <div className="remove-button" onClick={clearItemHandler}>
+        &#10005;
+      </div>
     </div>
   );
 };

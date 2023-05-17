@@ -8,25 +8,31 @@ import CheckoutItem from "../../components/checkout-item/checkout-item.component
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const { cartItems } = useContext(CartContext);
-  const [totalCost, setTotalCost] = useState(0);
-
-  useEffect(() => {
-    const prices = cartItems.map((item) => item.price * item.quantity);
-    setTotalCost(prices.reduce((accumulator, price) => accumulator + price, 0));
-  }, [cartItems]);
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   return (
     <div className="checkout-container">
       <span className="checkout-header">
-        product description quantity price remove
+        <div className="header-block">
+          <span>Product</span>
+        </div>
+        <div className="header-block">
+          <span>Description</span>
+        </div>
+        <div className="header-block">
+          <span>Quantity</span>
+        </div>
+        <div className="header-block">
+          <span>Price</span>
+        </div>
+        <div className="header-block">
+          <span>Remove</span>
+        </div>
       </span>
-      <div className="checkout-items">
-        {cartItems.map((item) => (
-          <CheckoutItem key={item.id} cartItem={item} />
-        ))}
-      </div>
-      <h2>Total: {totalCost}</h2>
+      {cartItems.map((item) => (
+        <CheckoutItem key={item.id} cartItem={item} />
+      ))}
+      <span className="total">Total: ${cartTotal}</span>
     </div>
   );
 };
