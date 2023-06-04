@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
 
-import CategoryGrid from "../../components/categoryGrid/categoryGrid.component";
+import CategoryGrid from "../../components/directory/directory.component";
 
 import "../../categories.styles.scss";
+import Directory from "../../components/directory/directory.component";
 
 const Home = () => {
   const categories = [
@@ -36,7 +37,7 @@ const Home = () => {
   return (
     <div>
       <Outlet />
-      <CategoryGrid categories={categories} />
+      <Directory categories={categories} />
     </div>
   );
 };
