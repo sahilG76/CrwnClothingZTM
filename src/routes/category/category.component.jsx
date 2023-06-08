@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import ProductCard from "../../components/product-card/product-card.component";
 import { CategoriesContext } from "../../contexts/categories.context";
 
-import "./category.styles.scss";
+import { CategoryTitle, CategoryContainer } from "./category.styles.jsx";
 
 const Category = () => {
   const { category } = useParams();
@@ -17,13 +17,13 @@ const Category = () => {
 
   return (
     <>
-      <h2 className="category-title">{category.toUpperCase()}</h2>
-      <div className="category-container">
+      <CategoryTitle>{category.toUpperCase()}</CategoryTitle>
+      <CategoryContainer>
         {products && // need to safeguard (defensive programming) products array since categories map is ASYNCHRONOUSLY retrieved. (must wait for products to be not null to render using it)
           products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
+      </CategoryContainer>
     </>
   );
 };
