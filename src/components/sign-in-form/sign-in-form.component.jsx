@@ -6,7 +6,7 @@ import {
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles.jsx";
@@ -80,7 +80,11 @@ const SignInForm = () => {
         <ButtonsContainer>
           <Button type="submit">Sign in</Button>
 
-          <Button buttonType="google" type="button" onClick={signInWithGoogle}>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type="button"
+            onClick={signInWithGoogle}
+          >
             Google Sign-in
           </Button>
         </ButtonsContainer>
