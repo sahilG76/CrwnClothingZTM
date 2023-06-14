@@ -6,7 +6,7 @@ import "./cart-icon.styles.jsx";
 import {
   CartIconContainer,
   ItemCount,
-  ShopBagIcon,
+  ShoppingIcon,
 } from "./cart-icon.styles.jsx";
 
 const CartIcon = () => {
@@ -16,7 +16,7 @@ const CartIcon = () => {
 
   return (
     <CartIconContainer onClick={toggleIsCartOpen}>
-      <ShopBagIcon />
+      <ShoppingIcon />
       <ItemCount>{cartQuantity}</ItemCount>
     </CartIconContainer>
   );

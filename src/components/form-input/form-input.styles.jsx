@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 const subColor = "grey";
 const mainColor = "black";
 
+// css 'block' used to conditionally render certains style by storing style into variable and injecting into styled components as needed (conditionally)
 const shrinkLabelStyles = css`
   top: -14px;
   font-size: 12px;
